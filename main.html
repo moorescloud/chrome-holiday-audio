@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <link rel="stylesheet" href="jquery.mobile-1.3.2.min.css" type="text/css" />
+
+    <script src="jquery-2.0.3.min.js"></script>
+    <script src="dns.js"></script>
+    <script src="mdns.js"></script>
+    <script src="main.js"></script>
+
+    <link href="main.css" rel="stylesheet" type="text/css" />
+
+<style>
+#example {
+    background-color: #212121;
+    color: #F2F2F2;
+    font-family: 'Myriad Pro', Calibri, Helvetica, Arial, sans-serif;
+    font-size: small;
+  height: 550px;
+}
+
+#example a {
+    text-decoration: none;
+    color: #007edf;
+}
+
+#example p {
+    margin: 2px;
+}
+
+#example img {
+  border: none;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  -o-box-shadow: none;
+  -ms-box-shadow: none;
+}
+
+#example audio {
+    width: 100%;
+}
+
+#example .showIfNoApi {
+    display: none;
+}
+
+#example #visualisation {
+    height: 255px;
+    position: relative;
+    margin: 10px;
+    -webkit-box-reflect: below 3px -webkit-gradient(linear, left top, left bottom, from(transparent), to(rgba(255,255,255,0.2)));
+}
+
+#example #visualisation > div {
+    width: 2.5%;
+    background-color: darkorange;
+    display: inline-block;
+    position: absolute;
+    bottom: 0px;
+}
+</style>
+  </head>
+  <body>
+<form>
+  Select a Holiday: <select id="selector"></select><br>
+  <input type="button" value="Start" id="thebutton" style="width:100px;">
+</form>  
+<div id='example'>
+  <audio class='hideIfNoApi' controls='controls' id='player' src='http://ice-sov.musicradio.com:80/ClassicFMMP3'> </audio>
+  <p class='hideIfNoApi'><strong>Music: </strong><em>Classic FM Live Stream</p>
+
+  <div class='hideIfNoApi' id='visualisation'> </div>
+
+  <p class='showIfNoApi'>Unable to run this Web Audio API example. <a href='http://caniuse.com/#feat=audio-api'>Check browser support</a></p>
+  <img class='showIfNoApi' src='/img/post-2013-02-19-screenshot.png' />
+</div>
+
+
+<!--<audio controls='controls' id='player' src='http://live.btvradio.bg:8000/classic-fm.mp3'> </audio>
+<div class='hideIfNoApi' id='visualisation'> </div>-->
+  </body>
+</html>
+

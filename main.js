@@ -188,6 +188,12 @@ $(function () {
 
     function makePrettyHolidayFromData(datas) {
 
+      /*slow_count = slow_count + 1;
+      if (slow_count == 1024) {
+        slow_count = 0;
+        return;
+      }*/
+
       if (hol == null)
         return;
 
@@ -308,5 +314,8 @@ var BAR_YELLOW = 0xc0;
 
 var station_urls = [ 'http://mp3.ffh.de/ffhchannels/hqspezial1.mp3',
 'http://icelive0.45999-icelive0.cdn.qbrick.com/5608/45999_jou_radio.mp3',
-'http://christmasradiofm.bcast.infomaniak.ch/christmasradiofm-128.mp3' ];
+'http://christmasradiofm.bcast.infomaniak.ch/christmasradiofm-128.mp3',
+'http://http-live.sr.se/srextra11-mp3-192',
+'http://mp3channels.webradio.antenne.de/event' ];
 
+var slow_count = 0;

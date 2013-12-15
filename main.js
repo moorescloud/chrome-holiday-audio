@@ -292,10 +292,21 @@ $( document ).ready( function() {
     console.log(buttonState);
     console.log($('#selector').val())
   });
+
+  // Deal with selecting the stations
+  $( "#station" ).change(function() {
+    var choice = $( "#station" ).val();
+    console.log( "Station changed to ", choice );
+    $( "#player" ).attr('src', station_urls[parseInt(choice)] );
+  });
 });
 
 var BAR_BLUE = 0x10;
 var BAR_CYAN = 0x40;
 var BAR_GREEN = 0x80;
 var BAR_YELLOW = 0xc0;
+
+var station_urls = [ 'http://mp3.ffh.de/ffhchannels/hqspezial1.mp3',
+'http://icelive0.45999-icelive0.cdn.qbrick.com/5608/45999_jou_radio.mp3',
+'http://christmasradiofm.bcast.infomaniak.ch/christmasradiofm-128.mp3' ];
 

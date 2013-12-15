@@ -17,6 +17,7 @@ function Holiday(address) {
   this.setglobe = setglobe;
   this.setstring = setstring;
   this.getglobe = getglobe;
+  this.chase = chase;
   this.render = render;
 
   var globes = new Uint8Array(160);
@@ -69,6 +70,21 @@ function Holiday(address) {
       baseptr +=1
     }
     return;
+  }
+
+  function chase(r, g, b) {
+    // Move all the globes up one position
+    // Set the first globe to the passed RGB
+    baseptr = this.FRAME_IGNORE;
+    for (j = 0; j < (this.NUM_GLOBES-1); j++) {   // Move up
+      globes[baseptr+3] = globes[baseptr];        // move R
+      baseptr += 1;
+      globes[baseptr+3] = globes[baseptr];        // Move G
+      baseptr += 1;     
+      globes[baseptr+3] = globes[baseptr];        // Move B
+      baseptr += 1;  
+    }
+    this.setglobe(0, r, g, b);                    // Add bottom
   }
 
   function getglobe() {
@@ -156,7 +172,8 @@ $(function () {
 
     // Create the analyser
     var analyser = context.createAnalyser();
-    analyser.fftSize = 64;
+    analyser.fftSize = 256;
+    console.log("analyzer: ", analyser.frequencyBinCount, analyser.frequencyBinCount);
     var frequencyData = new Uint8Array(analyser.frequencyBinCount);
     var timeData = new Uint8Array(analyser.frequencyBinCount);
 
@@ -169,19 +186,29 @@ $(function () {
     }
     var bars = $("#visualisation > div");
 
-    function makePrettyHolidayTimeDomainData() {
+    function makePrettyHolidayFromData(datas) {
 
       if (hol == null)
         return;
 
       // Let's sum the bytes and hope for the best here
       // Start off simple, with individual byte values which become the color.
-      var sum = 0
-      for (i=0; i < timeData.length; i++) {
-        var sum = sum + Math.abs(timeData[i] - 128);
+      for (i=0; i < hol.NUM_GLOBES; i++) {
+
+        if (datas[i] < BAR_BLUE) {
+          c = [ 0x00, 0x00, 0x80 ];
+        } else if ( datas[i] < BAR_CYAN ) {
+          c = [ 0x00, 0x80, 0x80 ];        
+        } else if ( datas[i] < BAR_GREEN ) {
+          c = [ 0x00, 0x80, 0x00 ];
+        } else if ( datas[i] < BAR_YELLOW ) {
+          c = [ 0x80, 0x80, 0x00 ];
+        } else {
+          c = [ 0x80, 0x00, 0x00 ];
+        }
+        hol.setglobe(i, c[0], c[1], c[2]);
       }
-        hol.setstring(sum, sum, sum);
-        hol.render();
+      hol.render();
     }
 
     // Get the frequency data and update the visualisation
@@ -190,10 +217,10 @@ $(function () {
         requestAnimationFrame(update);
 
         analyser.getByteFrequencyData(frequencyData);
-        console.log(frequencyData);
+        //console.log(frequencyData);
 
-        analyser.getByteTimeDomainData(timeData);
-        makePrettyHolidayTimeDomainData();
+        //analyser.getByteTimeDomainData(timeData);
+        makePrettyHolidayFromData(frequencyData);
 
         bars.each(function (index, bar) {
             bar.style.height = frequencyData[index] + 'px';
@@ -266,3 +293,8 @@ $( document ).ready( function() {
     console.log($('#selector').val())
   });
 });
+
+var BAR_BLUE = 0x10;
+var BAR_CYAN = 0x40;
+var BAR_GREEN = 0x80;
+var BAR_YELLOW = 0xc0;

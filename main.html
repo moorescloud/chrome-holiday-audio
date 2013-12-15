@@ -11,61 +11,11 @@
 
     <link href="main.css" rel="stylesheet" type="text/css" />
 
-<style>
-#example {
-    background-color: #212121;
-    color: #F2F2F2;
-    font-family: 'Myriad Pro', Calibri, Helvetica, Arial, sans-serif;
-    font-size: small;
-  height: 550px;
-}
-
-#example a {
-    text-decoration: none;
-    color: #007edf;
-}
-
-#example p {
-    margin: 2px;
-}
-
-#example img {
-  border: none;
-  box-shadow: none;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  -o-box-shadow: none;
-  -ms-box-shadow: none;
-}
-
-#example audio {
-    width: 100%;
-}
-
-#example .showIfNoApi {
-    display: none;
-}
-
-#example #visualisation {
-    height: 255px;
-    position: relative;
-    margin: 10px;
-    -webkit-box-reflect: below 3px -webkit-gradient(linear, left top, left bottom, from(transparent), to(rgba(255,255,255,0.2)));
-}
-
-#example #visualisation > div {
-    width: 2.5%;
-    background-color: darkorange;
-    display: inline-block;
-    position: absolute;
-    bottom: 0px;
-}
-</style>
   </head>
   <body>
 <form>
-  Select a Holiday: <select id="selector"></select><br>
-  <input type="button" value="Start" id="thebutton" style="width:100px;">
+  <span id="labeltext">Select a Holiday: </span><select id="selector"></select>
+  <input type="button" value="Start" id="thebutton" style="width:100px;"><p/>
 </form>  
 <div id='example'>
   <!--<audio class='hideIfNoApi' controls='controls' id='player' src='http://ice-sov.musicradio.com:80/ClassicFMMP3'> </audio>-->
@@ -78,7 +28,6 @@
   <p class='showIfNoApi'>Unable to run this Web Audio API example. <a href='http://caniuse.com/#feat=audio-api'>Check browser support</a></p>
   <img class='showIfNoApi' src='/img/post-2013-02-19-screenshot.png' />
 </div>
-
 
 <!--<audio controls='controls' id='player' src='http://live.btvradio.bg:8000/classic-fm.mp3'> </audio>
 <div class='hideIfNoApi' id='visualisation'> </div>-->

@@ -298,3 +298,4 @@ var BAR_BLUE = 0x10;
 var BAR_CYAN = 0x40;
 var BAR_GREEN = 0x80;
 var BAR_YELLOW = 0xc0;
+
